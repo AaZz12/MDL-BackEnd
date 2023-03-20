@@ -1,19 +1,19 @@
 /*Importation des modules*/
+const express = require("express");
 const data = require("../data/data");
 
 /*Fonctions exportées*/
 const business_public = {
-    get_all_users : (req, res, next)=>{
+    get_all_users : ()=>{
+    },
+    add_user : ()=>{
 
     },
-    add_user : (req, res, next)=>{
+    edit_user : ()=>{
 
     },
-    edit_user : (req, res, next)=>{
+    delete_user : ()=>{
 
-    },
-    delete_user : (req, res, next)=>{
-        
     }
 
     
