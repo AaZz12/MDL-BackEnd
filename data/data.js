@@ -45,8 +45,10 @@ const data_public = {
      * @returns {User[]} Tableau de tous les utilisateurs
      */
     get_all_users: () => read_database_file(),
-    /**
-     * @param {user} User 
+
+    /**Ajouter un utilisateur et verifie qu'il est bien ajoute
+     * @param {user} User l'utilisateur qu'on va ajouter à la bdd
+     * @returns {Boolean} est-ce que l'utilisateur est ajouté ?
      */
     add_user: user => {
         let users;
@@ -61,6 +63,7 @@ const data_public = {
         user.id = get_last_index(users) + 1;
         user.created_at = new Date().toUTCString();
 
+        //ajoute l'utilisateur
         users.push(user);
 
         // écris les utilisateurs et renvoie faux s'il n'y arrive pas
