@@ -53,6 +53,24 @@ const is_valid_user = user => {
     return true;
 }
 
+/**
+ * Check if the user is edited
+ * @param {user} user The user 
+ * @returns {Boolean} is the user edited ?
+ */
+const is_edited_user = user => {
+
+}
+
+/**
+ * Check if the user is deleted
+ * @param {user} user The user 
+ * @returns {Boolean} is the user deleted ?
+ */
+const is_deleted_user = user => {
+    
+}
+
 /*Fonctions exportées*/
 const business_public = {
     /**
@@ -60,6 +78,11 @@ const business_public = {
      * @returns {user[]} All users from database
      */
     get_all_users : ()=> data.get_all_users(),
+    /**
+     * Add an user to database
+     * @param {user} user the user to add
+     * @returns {Boolean} is the user added to database ?
+     */
     add_user : user =>{
         if(!is_valid_user(user)){
             return false;
@@ -67,11 +90,27 @@ const business_public = {
         
         return data.add_user(user);
     },
+    /**
+     * Edit an user in the database
+     * @param {user} user the user to edit
+     * @returns {Boolean} is the user edited in the database ?
+     */
     edit_user : ()=>{
-
+        if(!is_valid_user(user)){
+            return false;
+        }
+        return data.edit_user(user);
     },
+    /**
+     * Delete an user in the database
+     * @param {user} user the user to delete
+     * @returns {Boolean} is the user deleted in the database ?
+     */
     delete_user : ()=>{
-
+        if(!is_valid_user(user)){
+            return false;
+        }
+        return data.delete_user(user);
     }
 
     
