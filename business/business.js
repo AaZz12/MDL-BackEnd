@@ -4,14 +4,15 @@ const data = require("../data/data");
 
 /**
  * @typedef {Object} user
- * @property {string} first
- * @property {string} last
- * @property {string} email
- * @property {string} company
- * @property {string} country
- * @property {number?} id 
- * @property {string?} date 
+ * @property {string} first Prenom  
+ * @property {string} last Nom
+ * @property {string} email Mail
+ * @property {string} company Societe
+ * @property {string} country Pays
+ * @property {number?} id  id
+ * @property {string?} created_at date
  */
+
 //utilisation de regex101
 const user_checker = {
     first: /^[A-Za-z-]+$/, //prénom
@@ -73,24 +74,6 @@ const is_valid_user = (user, check_all_keys) => {
     return is_valid_user;
 }
 
-/**
- * Check if the user is edited
- * @param {user} user The user 
- * @returns {Boolean} is the user edited ?
- */
-const is_edited_user = user => {
-
-}
-
-/**
- * Check if the user is deleted
- * @param {user} user The user 
- * @returns {Boolean} is the user deleted ?
- */
-const is_deleted_user = user => {
-    
-}
-
 /*Fonctions exportées*/
 const business_public = {
     /**
@@ -117,7 +100,7 @@ const business_public = {
      */
     edit_user : user => {
         //on check si id est bien envoyé
-        if(!(id in user)){
+        if(!(id in user && to_edit in user)){
             return false;
         }
 
