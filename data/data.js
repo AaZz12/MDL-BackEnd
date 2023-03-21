@@ -85,13 +85,6 @@ const data_public = {
 
 }
 
-/*Initialisation de l'application*/
-
-
-/*API BackEnd*/
-
-
-
 /*Exportation comme module */
 
 module.exports=data_public;
