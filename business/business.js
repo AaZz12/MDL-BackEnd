@@ -29,28 +29,48 @@ const user_checker = {
  */
 const are_array_equals = (a, b) => JSON.stringify(a) == JSON.stringify(b);
 
+/**
+ * Check if one array is a subarray of another
+ * @param {Array} a The subarray 
+ * @param {Array} b the subarray
+ * @returns {Boolean} Is a a subarray of b ?
+ */
+const is_subarray_of = (a,b) => {
+    for(let elem of a ){
+        if(b.indexOf(elem) == -1){
+            return false;
+        }
+    }
+
+};
+
 
 /**
  * Check if the user is valid
  * @param {user} user The user 
+ * @param {Boolean} Do we check all keys of the checker
  * @returns {Boolean} is the user valid ?
  */
-const is_valid_user = user => {
-    //on regarde si le user n'existe pas déjà
-    if(!are_array_equals(Object.keys(user),Object.keys(user_checker))){
+const is_valid_user = (user, check_all_keys) => {
+    let user_keys=Obejct.keys(user);
+    let checker_keys = Object.keys(user_checker);
+
+    //on regarde les clés de l'user donné
+    if(check_all_keys && !are_array_equals(user_keys, checker_keys)){
+        return false;
+    }
+    //on regarde le sous tableau de l'user donné
+    if(!check_all_keys && !is_subarray_of(user_keys, checker_keys)){
         return false;
     }
 
     //on regarde si les paramètres sont valides
     let is_valid_user = Object.keys(user)
         .reduce(
-            (acc, key) => (user[key].match(user_checker[key])!=null)&& acc,
+            (acc, key) => (user[key].match(user_checker[key])!=null) && acc,
             true
         );
-    if(!is_valid_user){
-        return false;
-    }
-    return true;
+    return is_valid_user;
 }
 
 /**
@@ -84,7 +104,7 @@ const business_public = {
      * @returns {Boolean} is the user added to database ?
      */
     add_user : user =>{
-        if(!is_valid_user(user)){
+        if(!is_valid_user(user, true)){
             return false;
         }
         
@@ -92,22 +112,39 @@ const business_public = {
     },
     /**
      * Edit an user in the database
-     * @param {user} user the user to edit
+     * @param {id:number, to_edit: user} user the user to edit
      * @returns {Boolean} is the user edited in the database ?
      */
-    edit_user : ()=>{
-        if(!is_valid_user(user)){
+    edit_user : user => {
+        //on check si id est bien envoyé
+        if(!(id in user)){
+            return false;
+        }
+
+        //on check si l'id est bien un nombre
+        if((typeof user.id !== "number")){
+            return false;
+        }
+
+        //on checj si la structure a modifier est correct
+        if(!is_valid_user(user.to_edit, false)){
             return false;
         }
         return data.edit_user(user);
     },
     /**
      * Delete an user in the database
-     * @param {user} user the user to delete
+     * @param {id:number} user the user to delete
      * @returns {Boolean} is the user deleted in the database ?
      */
-    delete_user : ()=>{
-        if(!is_valid_user(user)){
+    delete_user : user =>{
+        //on check si id est bien envoyé
+        if(!(id in user)){
+            return false;
+        }
+
+        //on check si l'id est bien un nombre
+        if((typeof user.id !== "number")){
             return false;
         }
         return data.delete_user(user);
