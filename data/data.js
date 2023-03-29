@@ -81,7 +81,36 @@ const data_public = {
 
     edit_user: () => {},
 
-    delete_user: () => {}
+
+    /**
+     * Supprime un utilisateur de la bdd
+     * @param {number} id l'id de l'user qu'il faut supprimer
+     * @returns {Boolean} Est-ce que l'utilisateur est supprimé ?
+     */
+    delete_user: id => {
+        let users;
+
+        // lis les utilisateurs et renvoie faux  s'il n'y arrive pas
+        try{
+            users = read_database_file();
+        } catch {
+            console.error("Couldn't read from database");
+            return false;
+        }
+        //supprime l'utilisateur avec l'id donné
+        users.filter(user => user.id !=id);
+
+         // écris les utilisateurs et renvoie faux s'il n'y arrive pas
+         try{
+            write_database_file(users);
+        } catch {
+            console.error("Couldn't write in database");
+            return false;
+        }
+
+        return true;
+
+    }
 
 }
 
