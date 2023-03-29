@@ -79,7 +79,47 @@ const data_public = {
         return true;
     },
 
-    edit_user: () => {},
+    /**
+     * Edit un utilisateur de la bdd
+     * @param {{id:number, to_edit : user}} user l'id de l'utilisateur qu'il faut éditer
+     * @returns {Boolean} Est-ce que l'utilisateur a été édité ? 
+     */
+    edit_user: user => {
+        let users;
+        // lis les utilisateurs et renvoie faux  s'il n'y arrive pas
+        try{
+            users = read_database_file();
+        } catch {
+            console.error("Couldn't read from database");
+            return false;
+        }
+
+        // récup l'indice de l'utilisateur à modif
+        let user_index = -1;
+        for(let i = 0; i < users.lenght ; i++){
+            if (users[i].id == user.id){
+                user_index = i;
+            }
+        }
+        // Si on trouve pas l'utilisateur
+        if (user_index == -1) return false;
+
+        // modification de l'utilisateur
+        for (let key in user.to_edit){
+            users[user_index][key] = user.to_edit[key];
+        }
+
+        // écris les utilisateurs et renvoie faux s'il n'y arrive pas
+        try{
+            write_database_file(users);
+        } catch {
+            console.error("Couldn't write in database");
+            return false;
+        }
+
+        return true;
+
+    },
 
 
     /**
@@ -90,7 +130,7 @@ const data_public = {
     delete_user: id => {
         let users;
 
-        // lis les utilisateurs et renvoie faux  s'il n'y arrive pas
+        // lis les utilisateurs et renvoie faux s'il n'y arrive pas
         try{
             users = read_database_file();
         } catch {
@@ -98,7 +138,7 @@ const data_public = {
             return false;
         }
         //supprime l'utilisateur avec l'id donné
-        users.filter(user => user.id !=id);
+        users.filter(user => user.id != id);
 
          // écris les utilisateurs et renvoie faux s'il n'y arrive pas
          try{
