@@ -132,6 +132,8 @@ const business_public = {
         }
         return data.delete_user(user);
     }
+
+    
 };
 
 

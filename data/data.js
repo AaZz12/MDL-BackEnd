@@ -86,6 +86,7 @@ const data_public = {
      */
     edit_user: user => {
         let users;
+
         // lis les utilisateurs et renvoie faux  s'il n'y arrive pas
         try{
             users = read_database_file();
@@ -96,17 +97,25 @@ const data_public = {
 
         // récup l'indice de l'utilisateur à modif
         let user_index = -1;
-        for(let i = 0; i < users.lenght ; i++){
-            if (users[i].id == user.id){
-                user_index = i;
+        for(let i = 0 ; i < users.length; i++)
+        {
+            if(users[i].id=== user.id)
+            {
+                user_index = i ;
             }
+        
         }
+
         // Si on trouve pas l'utilisateur
-        if (user_index == -1) return false;
+        if(user_index==-1)
+        {
+            return false;
+        }
 
         // modification de l'utilisateur
-        for (let key in user.to_edit){
-            users[user_index][key] = user.to_edit[key];
+        for(let key in user.to_edit)
+        {
+            users[user_index][key] = user.to_edit[key]
         }
 
         // écris les utilisateurs et renvoie faux s'il n'y arrive pas
@@ -118,6 +127,7 @@ const data_public = {
         }
 
         write_database_file(users);
+
         return true;
 
     },
@@ -139,9 +149,9 @@ const data_public = {
             return false;
         }
         //supprime l'utilisateur avec l'id donné
-        users.filter(user => user.id != id);
+        users.filter(user => user.id !=id);
 
-         // écris les utilisateurs et renvoie faux s'il n'y arrive pas
+        //écris les utilisateurs et renvoie faux s'il n'y arrive pas
          try{
             write_database_file(users);
         } catch {

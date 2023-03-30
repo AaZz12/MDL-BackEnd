@@ -12,7 +12,7 @@ const api = {
      * Start the api on given port
      * @param {number} port The port identifier
      */
-    start : port=>{
+    start: port=>{
         //Autorisation des reqêtes JSON
         app.use(express.json());
 
