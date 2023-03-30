@@ -53,8 +53,8 @@ const is_subarray_of = (a,b) => {
  * @returns {Boolean} is the user valid ?
  */
 const is_valid_user = (user, check_all_keys) => {
-    let user_keys=Obejct.keys(user);
-    let checker_keys = Object.keys(user_checker);
+    let user_keys=Object.keys(user).sort();
+    let checker_keys = Object.keys(user_checker).sort();
 
     //on regarde les clés de l'user donné
     if(check_all_keys && !are_array_equals(user_keys, checker_keys)){
@@ -100,7 +100,7 @@ const business_public = {
      */
     edit_user : user => {
         //on check si id est bien envoyé
-        if(!(id in user && to_edit in user)){
+        if(!("id" in user && "to_edit" in user)){
             return false;
         }
 
@@ -122,7 +122,7 @@ const business_public = {
      */
     delete_user : user =>{
         //on check si id est bien envoyé
-        if(!(id in user)){
+        if(!("id" in user)){
             return false;
         }
 
@@ -132,8 +132,6 @@ const business_public = {
         }
         return data.delete_user(user);
     }
-
-    
 };
 
 

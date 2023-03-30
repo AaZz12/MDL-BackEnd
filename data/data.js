@@ -15,7 +15,7 @@ const fs = require("fs");
 const { get } = require("http");
 
 //Constantes de la base de donnée
-const DATABASE = "bdd.json";
+const DATABASE = __dirname + "/bdd.json";
 
 //Utilitaires
 /**
@@ -117,6 +117,7 @@ const data_public = {
             return false;
         }
 
+        write_database_file(users);
         return true;
 
     },

@@ -18,13 +18,13 @@ const api = {
 
         //Get la requête
         //Retourne un json contenant les users
-        app.get(REQUESTS_URL, (res, req)=>{
+        app.get(REQUESTS_URL, (req, res)=>{
             res.json(business.get_all_users());
         });
 
         //Post la requête
         //prend la requête du corps et ajoute la réponse
-        app.post(REQUESTS_URL, (res, req)=>{
+        app.post(REQUESTS_URL, (req, res)=>{
             let is_added = business.add_user(req.body);
 
             if(is_added){
@@ -36,7 +36,7 @@ const api = {
 
         //Put la requête
         //prend la requête du corps et ajoute la réponse
-        app.put(REQUESTS_URL, (res, req)=>{
+        app.put(REQUESTS_URL, (req, res)=>{
             let is_edited = business.edit_user(req.body);
 
             if(is_edited){
@@ -48,7 +48,7 @@ const api = {
 
         //Delete la requête
         //prend la requête du corps et ajoute la réponse
-        app.delete(REQUESTS_URL, (res, req)=>{
+        app.delete(REQUESTS_URL, (req, res)=>{
             let is_deleted = business.delete_user(req.body);
 
             if(is_deleted){
@@ -61,10 +61,13 @@ const api = {
         app.listen(port, ()=>{
             console.log(`App listening to port ${port}`);
         });
+
+        //debug
+        app.use(express.static("public"));
     }
 };
 
 
 /*Exportation comme module */
 
-module.exports={api};
+module.exports=api;
