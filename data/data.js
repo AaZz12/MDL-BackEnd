@@ -99,7 +99,7 @@ const data_public = {
         let user_index = -1;
         for(let i = 0 ; i < users.length; i++)
         {
-            if(users[i].id=== user.id)
+            if(users[i].id == user.id)
             {
                 user_index = i ;
             }
@@ -107,7 +107,7 @@ const data_public = {
         }
 
         // Si on trouve pas l'utilisateur
-        if(user_index==-1)
+        if(user_index == -1)
         {
             return false;
         }
@@ -125,8 +125,6 @@ const data_public = {
             console.error("Couldn't write in database");
             return false;
         }
-
-        write_database_file(users);
 
         return true;
 
@@ -148,9 +146,16 @@ const data_public = {
             console.error("Couldn't read from database");
             return false;
         }
-        //supprime l'utilisateur avec l'id donné
-        users.filter(user => user.id !=id);
+        
+        // on check si l'id est dans les utilisateurs
+        if(users.map(user => user.id).indexOf(id) == -1){
+            return false;
+        } 
 
+        //supprime l'utilisateur avec l'id donné
+        users = users.filter(user => user.id !== id);
+        
+        
         //écris les utilisateurs et renvoie faux s'il n'y arrive pas
          try{
             write_database_file(users);

@@ -39,10 +39,11 @@ const are_array_equals = (a, b) => JSON.stringify(a) == JSON.stringify(b);
 const is_subarray_of = (a,b) => {
     for(let elem of a ){
         if(b.indexOf(elem) == -1){
+            console.log("erreur 8");
             return false;
         }
     }
-
+    return true;
 };
 
 
@@ -59,6 +60,7 @@ const is_valid_user = (user, check_all_keys) => {
     //on regarde les clés de l'user donné
     if(check_all_keys && !are_array_equals(user_keys, checker_keys)){
         return false;
+        
     }
     //on regarde le sous tableau de l'user donné
     if(!check_all_keys && !is_subarray_of(user_keys, checker_keys)){
@@ -90,7 +92,6 @@ const business_public = {
         if(!is_valid_user(user, true)){
             return false;
         }
-        
         return data.add_user(user);
     },
     /**
@@ -109,7 +110,7 @@ const business_public = {
             return false;
         }
 
-        //on checj si la structure a modifier est correct
+        //on check si la structure a modifier est correct
         if(!is_valid_user(user.to_edit, false)){
             return false;
         }
@@ -128,9 +129,10 @@ const business_public = {
 
         //on check si l'id est bien un nombre
         if((typeof user.id !== "number")){
-            return false;
+            return false;      
         }
-        return data.delete_user(user);
+
+        return data.delete_user(user.id);
     }
 
     

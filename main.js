@@ -36,6 +36,19 @@ fetch("/users", {
     })
 })
 
+fetch("/users", {
+    method : "delete",
+    headers:{
+        "Content-Type" : "application/json"
+    },
+    body: JSON.stringify({
+        first: "jean",
+        last: "Bombeuir",
+        country : "fr",
+        company: "saucice",
+        email: "jean.bombeur@gmail.com"
+    }) 
+})
 
 //valide
 */
