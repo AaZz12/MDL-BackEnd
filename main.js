@@ -41,12 +41,7 @@ fetch("/users", {
     headers:{
         "Content-Type" : "application/json"
     },
-    body: JSON.stringify({
-        first: "jean",
-        last: "Bombeuir",
-        country : "fr",
-        company: "saucice",
-        email: "jean.bombeur@gmail.com"
+    body: 
     }) 
 })
 

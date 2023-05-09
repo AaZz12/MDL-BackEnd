@@ -1,6 +1,8 @@
 /*Importation des modules*/
 const express = require("express");
 const business = require("../business/business");
+const cors = require("cors");
+
 
 /*Initialisation de l'application*/
 let app = express();
@@ -15,6 +17,10 @@ const api = {
     start: port=>{
         //Autorisation des reqêtes JSON
         app.use(express.json());
+
+        app.use(cors({
+            origin: "*"
+        }));
 
         //Get la requête
         //Retourne un json contenant les users
